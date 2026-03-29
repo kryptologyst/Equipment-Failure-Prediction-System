@@ -1,0 +1,97 @@
+# Equipment Failure Prediction Configuration
+
+# Random seed for reproducibility
+random_seed: 42
+
+# Data configuration
+data:
+  n_samples: 1000
+  n_features: 5
+  noise_level: 0.1
+  test_size: 0.25
+  validation_size: 0.2
+
+# Model configurations
+models:
+  linear_regression:
+    fit_intercept: true
+    
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 5
+    min_samples_leaf: 2
+    random_state: 42
+    
+  xgboost:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+    
+  lightgbm:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+# Survival analysis configuration
+survival_analysis:
+  use_cox: true
+  use_weibull: true
+  penalizer: 0.01
+
+# Evaluation metrics
+evaluation:
+  metrics:
+    - mae
+    - mse
+    - rmse
+    - r2
+    - mape
+    - smape
+  
+  # Business metrics for equipment failure prediction
+  business_metrics:
+    - maintenance_cost_savings
+    - downtime_reduction
+    - false_alarm_rate
+    - detection_rate
+
+# Feature engineering
+feature_engineering:
+  create_interactions: true
+  create_polynomials: false
+  polynomial_degree: 2
+  interaction_features:
+    - ["temperature", "pressure"]
+    - ["pressure", "vibration"]
+    - ["temperature", "vibration"]
+
+# Hyperparameter optimization
+optimization:
+  use_optuna: true
+  n_trials: 50
+  timeout: 300  # seconds
+  
+# Visualization settings
+visualization:
+  figure_size: [12, 8]
+  dpi: 100
+  style: "seaborn-v0_8"
+  
+# Logging configuration
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+# Paths
+paths:
+  data_dir: "data"
+  models_dir: "models"
+  assets_dir: "assets"
+  logs_dir: "logs"
